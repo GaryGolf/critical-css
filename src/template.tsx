@@ -12,8 +12,8 @@ export const HTML: React.SFC<Props> = props => {
             </head>
             <body>
                 <div id="app">{props.children}</div>
-                <script src="/static/bundle.js" async />
-                <link rel="stylesheet" href="/static/styles.css" />
+                {/* <script src="/static/bundle.js" async /> */}
+                {/* <link rel="stylesheet" href="/static/styles.css" /> */}
             </body>
         </html>
     );

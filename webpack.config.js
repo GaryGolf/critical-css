@@ -17,23 +17,18 @@ const serverConfig = {
   module: {
     rules: [
       { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
-      { test: /\.css$/, use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: {
-          loader: 'css-loader',
-          query: {
+      { test: /\.css$/, use: [
+        // { loader: 'to-string-loader'},
+        { loader: 'fake-style-loader' },
+        { loader: 'css-loader', options: {  
             modules: true,
-            sourceMap: false,
             importLoaders: 1,
             localIdentName: '[local]__[hash:base64:5]'
-          }
-        }
-      })}
+          } 
+        }]
+      }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("styles.css")
-  ]
+  }
 };
 
 
