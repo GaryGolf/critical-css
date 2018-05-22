@@ -1,9 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import routes from './routes';
 
-ReactDOM.render(
-  <BrowserRouter>{routes}</BrowserRouter>,
-  document.getElementById('app')
-)
+ReactDOM.hydrate(<Router>{routes}</Router>, document.getElementById('app'));

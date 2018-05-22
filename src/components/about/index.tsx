@@ -7,7 +7,7 @@ export default class AboutPage extends React.PureComponent<Props, null> {
   render() {
     return (
       <div className={styles['about-container']}>
-        <h2>About</h2>
+        <h2>About this</h2>
       </div>
     )
   }
