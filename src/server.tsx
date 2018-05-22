@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactServer from 'react-dom/server';
 import { Express, Request, Response } from 'express';
-import { StaticRouter as Router} from 'react-router-dom';
+import { StaticRouter as Router } from 'react-router-dom';
 import { HTML } from './template';
 import routes from './routes';
 import HomePage from './components/home';
@@ -10,11 +10,12 @@ const port = 3000;
 const app: Express = express();
 
 app.use('/static', express.static(process.cwd() + '/dist'));
-app.get('*', (req:Request, res:Response) => {
+app.use((req:Request, res:Response) => {
   const context: { status?: number } = {};
   if (context.status && context.status >= 200 && context.status < 600) {
       res.statusCode = context.status;
   }
+
   const body = ReactServer.renderToString(
     <HTML>
       <Router context={context} location={req.url}>{routes}</Router>
