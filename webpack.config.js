@@ -12,6 +12,12 @@ const clientConfig = {
       extensions: ['.js', '.ts', '.tsx']
   },
 
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 3000
+  },
+
   module: {
       rules: [
           { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
