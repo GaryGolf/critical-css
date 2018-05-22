@@ -2,18 +2,19 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const clientConfig = {
-  entry: "./src/client.tsx",
+  mode: 'production',
+  entry: './src/client.tsx',
   output: {
-      filename: "bundle.js",
+      filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-      extensions: [".ts", ".tsx"]
+      extensions: ['.js', '.ts', '.tsx']
   },
 
   module: {
       rules: [
-          { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+          { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
       ]
   },
 
