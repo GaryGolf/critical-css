@@ -1,5 +1,6 @@
 import * as React from 'react';
-import * as styles from './style.css'
+import { Contacts } from './contacts';
+import * as styles from './about.css';
 
 interface Props {};
 
@@ -12,6 +13,7 @@ export default class AboutPage extends React.PureComponent<Props, null> {
     return (
       <div className={styles['about-container']}>
         <h2>About this</h2>
+        <Contacts/>
         {inlineStyle}
       </div>
     )
