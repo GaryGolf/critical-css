@@ -34,6 +34,7 @@ build/Release
 
 # compiled output
 dist
+server
 
 # Dependency directories
 node_modules/
