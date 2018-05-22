@@ -18,7 +18,6 @@ const serverConfig = {
     rules: [
       { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
       { test: /\.css$/, use: [
-        // { loader: 'to-string-loader'},
         { loader: 'fake-style-loader' },
         { loader: 'css-loader', options: {  
             modules: true,
