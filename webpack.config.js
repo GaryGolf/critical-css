@@ -2,6 +2,41 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const serverConfig = {
+  mode: 'production',
+  target: 'node',
+  entry: './src/server.tsx',
+  output: {
+      filename: 'index.js',
+      path: path.resolve(__dirname, 'server'),
+  },
+  resolve: {
+      extensions: ['.js', '.ts', '.tsx']
+  },
+
+  module: {
+    rules: [
+      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+      { test: /\.css$/, use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: {
+          loader: 'css-loader',
+          query: {
+            modules: true,
+            sourceMap: false,
+            importLoaders: 1,
+            localIdentName: '[local]__[hash:base64:5]'
+          }
+        }
+      })}
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("styles.css")
+  ]
+};
+
+
 const clientConfig = {
   mode: 'production',
   entry: './src/client.tsx',
@@ -43,4 +78,4 @@ const clientConfig = {
   ]
 };
 
-module.exports = clientConfig;
+module.exports = [ serverConfig, clientConfig ];
