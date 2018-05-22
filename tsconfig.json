@@ -3,9 +3,10 @@
     "module": "commonjs",
     "jsx": "react",
     "outDir": "./dist/",
-    "target": "es5"
+    "target": "es5",
+    "baseUrl": "./src",
+    "lib": ["esnext", "dom"]
   },
-  "include": [
-      "./src/**/*"
-  ]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
 }
