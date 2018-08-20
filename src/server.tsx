@@ -18,7 +18,9 @@ app.use((req:Request, res:Response) => {
 
   const body = ReactServer.renderToString(
     <HTML>
-      <Router context={context} location={req.url}>{routes}</Router>
+      <Router context={context} location={req.url}>
+        {routes}
+      </Router>
     </HTML>
   )
     res.send(body).status(200).end();
