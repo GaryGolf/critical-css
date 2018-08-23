@@ -1,4 +1,4 @@
-import cors from 'cors';
+import * as cors from 'cors';
 import * as React from 'react';
 import * as ReactServer from 'react-dom/server';
 import { Express, Request, Response } from 'express';
@@ -30,3 +30,5 @@ app.use((req:Request, res:Response) => {
   app.listen(port, () => {
     console.log(`Server is listeting on ${port}`);
   });
+
+  
