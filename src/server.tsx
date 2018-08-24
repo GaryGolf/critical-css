@@ -1,10 +1,12 @@
 import * as cors from 'cors';
 import * as React from 'react';
+import  { Provider } from 'react-redux'
 import * as ReactServer from 'react-dom/server';
 import { Express, Request, Response } from 'express';
 import { StaticRouter as Router } from 'react-router-dom';
 import { HTML } from './template';
 import { getRoutes, matchRoutes } from './routes';
+import { configureStore } from './store/config'
 const express = require('express');
 const port = 3000;
 const app: Express = express();
@@ -19,18 +21,22 @@ app.use((req:Request, res:Response) => {
 
   const routes:JSX.Element = getRoutes();
   const match = matchRoutes(req.url);
+   
 
   if(!match.length) {
     res.status(404).send('page not found');
     return;
   }
 
+  const store = configureStore({}, null);
 
   const body = ReactServer.renderToString(
     <HTML>
-      <Router context={context} location={req.url}>
-        {routes}
-      </Router>
+      <Provider store={store}>
+        <Router context={context} location={req.url}>
+          {routes}
+        </Router>
+      </Provider>
     </HTML>
   )
     res.send(body).status(200).end();
