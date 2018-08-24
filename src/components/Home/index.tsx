@@ -10,6 +10,7 @@ export default class HomePage extends React.PureComponent<Props, null> {
         <h1> Home Page </h1>
         <nav>
           <Link to="/about">About</Link>
+          <Link to="/message">Message</Link>
         </nav>
       </div>
     );
