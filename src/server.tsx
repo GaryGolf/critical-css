@@ -2,7 +2,7 @@ import * as cors from 'cors';
 import * as React from 'react';
 import * as ReactServer from 'react-dom/server';
 import { Express, Request, Response } from 'express';
-import { StaticRouter as Router, matchPath } from 'react-router-dom';
+import { StaticRouter as Router } from 'react-router-dom';
 import { HTML } from './template';
 import { getRoutes, matchRoutes } from './routes';
 const express = require('express');
