@@ -13,9 +13,10 @@ const routes = (
 );
 
 export const getRoutes = ():JSX.Element => routes;
-export const matchRoute = (path:string):match<any> => routes
+export const matchRoutes = (path:string):match<any>[] => routes
   .props
   .children
   .map(route => ({ ...route.props }))
-  .reduce((acc, route) => matchPath(path, route) || acc, null);
+  .reduce((acc, route) => [...acc, matchPath(path, route)], [])
+  .filter(route => !!route);
 

@@ -4,7 +4,7 @@ import * as ReactServer from 'react-dom/server';
 import { Express, Request, Response } from 'express';
 import { StaticRouter as Router, matchPath } from 'react-router-dom';
 import { HTML } from './template';
-import { getRoutes, matchRoute } from './routes';
+import { getRoutes, matchRoutes } from './routes';
 const express = require('express');
 const port = 3000;
 const app: Express = express();
@@ -18,9 +18,9 @@ app.use((req:Request, res:Response) => {
   }
 
   const routes:JSX.Element = getRoutes();
-  const match = matchRoute(req.url)
+  const match = matchRoutes(req.url);
 
-  if(!match) {
+  if(!match.length) {
     res.status(404).send('page not found');
     return;
   }

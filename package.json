@@ -4,9 +4,9 @@
   "description": "isomorphic style critical path css react boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "run-s build server",
+    "start": "run-p build server",
     "demo": "npm run build && run-p server open",
-    "build": "webpack",
+    "build": "webpack --watch",
     "devserver": "webpack-dev-server",
     "server": "nodemon server",
     "webpack": "webpack",
