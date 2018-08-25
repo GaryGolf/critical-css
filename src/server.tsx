@@ -19,27 +19,35 @@ app.use((req:Request, res:Response) => {
       res.statusCode = context.status;
   }
 
+
+  const store = configureStore({}, null);
   const routes:JSX.Element = getRoutes();
   const match = matchRoutes(req.url);
-   
-
   if(!match.length) {
     res.status(404).send('page not found');
     return;
   }
+  
+  const promises = match
+    .reduce((acc, r) => {
+      if (!r.component || !r.component.loadData) return acc
+      return [...acc, r.component.loadData];
+    }, [])
 
-  const store = configureStore({}, null);
-
-  const body = ReactServer.renderToString(
-    <HTML>
-      <Provider store={store}>
-        <Router context={context} location={req.url}>
-          {routes}
-        </Router>
-      </Provider>
-    </HTML>
-  )
-    res.send(body).status(200).end();
+  Promise.all(promises.map(p => p(store.dispatch)))
+    .then(() => {
+      const body = ReactServer.renderToString(
+        <HTML store={store.getState()}>
+          <Provider store={store}>
+            <Router context={context} location={req.url}>
+              {routes}
+            </Router>
+          </Provider>
+        </HTML>
+      )
+      res.send(body).status(200).end();
+    })
+   
   });
   
   app.listen(port, () => {
