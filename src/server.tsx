@@ -53,5 +53,3 @@ app.use((req:Request, res:Response) => {
   app.listen(port, () => {
     console.log(`Server is listeting on ${port}`);
   });
-
-  
