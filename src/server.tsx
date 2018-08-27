@@ -19,7 +19,6 @@ app.use((req:Request, res:Response) => {
       res.statusCode = context.status;
   }
 
-
   const store = configureStore({}, null);
   const routes:JSX.Element = getRoutes();
   const match = matchRoutes(req.url);
