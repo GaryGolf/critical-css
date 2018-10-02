@@ -1,6 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const threadLoader = require('thread-loader');
+
+threadLoader.warmup({},['fake-style-loader', 'css-loader']);
+
 
 const serverConfig = {
   mode: 'production',
@@ -16,8 +20,14 @@ const serverConfig = {
 
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+      { test: /\.tsx?$/, 
+        use: [
+          { loader: 'cache-loader'},
+          { loader: 'awesome-typescript-loader'}
+        ]
+      },
       { test: /\.css$/, use: [
+        { loader: 'thread-loader'},
         { loader: 'fake-style-loader' },
         { loader: 'css-loader', options: {  
             modules: true,
@@ -50,18 +60,24 @@ const clientConfig = {
 
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
-      { test: /\.css$/, use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: {
-          loader: 'css-loader',
-          query: {
-            modules: true,
-            sourceMap: false,
-            importLoaders: 1,
-            localIdentName: '[local]__[hash:base64:5]'
+      { test: /\.tsx?$/, 
+        use: [
+          { loader: 'cache-loader' },
+          { loader: 'awesome-typescript-loader' },
+        ]
+      },
+      { test: /\.css$/, 
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              sourceMap: false,
+              importLoaders: 1,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
           }
-        }
       })}
     ]
   },
