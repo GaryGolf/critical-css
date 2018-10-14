@@ -5,7 +5,6 @@ const threadLoader = require('thread-loader');
 
 threadLoader.warmup({},['fake-style-loader', 'css-loader']);
 
-
 const serverConfig = {
   mode: 'production',
   target: 'node',
