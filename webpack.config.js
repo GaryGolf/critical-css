@@ -39,7 +39,6 @@ const serverConfig = {
   }
 };
 
-
 const clientConfig = {
   mode: 'production',
   entry: './src/client.tsx',
